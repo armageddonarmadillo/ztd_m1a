@@ -25,4 +25,8 @@ public class Cannon {
     int grid_lock(int n){
         return ((n + 25) / 50);
     }
+
+    void thismethoddoesnothing(){
+        return;
+    }
 }
