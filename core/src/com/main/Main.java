@@ -15,9 +15,10 @@ public class Main extends ApplicationAdapter {
 	Random r;
 
 	//TODO: GAME LISTS
-	ArrayList<Zombie> zombies = new ArrayList<Zombie>();
-	ArrayList<Cannon> cannons = new ArrayList<Cannon>();
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
+	static ArrayList<Cannon> cannons = new ArrayList<Cannon>();
+	static ArrayList<Button> buttons = new ArrayList<Button>();
+	static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 	//THIS RUNS *ONCE* WHEN THE APPLICATION IS LOADED / OPENED
 	@Override
@@ -37,6 +38,7 @@ public class Main extends ApplicationAdapter {
 		for(Zombie z : zombies) z.draw(batch);
 		for(Cannon c : cannons) c.draw(batch);
 		for(Button b : buttons) b.draw(batch);
+		for(Bullet b : bullets) b.draw(batch);
 		batch.end();
 	}
 
@@ -47,7 +49,7 @@ public class Main extends ApplicationAdapter {
 		for(Zombie z : zombies) z.update();
 		for(Cannon c : cannons) c.update();
 		for(Button b : buttons) b.update();
-
+		for(Bullet b : bullets) b.update();
 		//removal of inactive elements
 		housekeeping();
 	}
@@ -55,7 +57,6 @@ public class Main extends ApplicationAdapter {
 	void tap(){
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
-
 			for(Cannon c : cannons) if(c.hitbox().contains(x, y)) return;
 			if(buildable(x, y)) cannons.add(new Cannon("fire", x, y));
 		}
@@ -79,6 +80,7 @@ public class Main extends ApplicationAdapter {
 
 	void housekeeping(){
 		for(Zombie z : zombies) if(!z.active) { zombies.remove(z); break; }
+		for(Bullet b : bullets) if(!b.active) { bullets.remove(b); break; }
 	}
 
 	//*******************END OF FILE********************
