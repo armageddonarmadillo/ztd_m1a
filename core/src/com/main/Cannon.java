@@ -38,7 +38,7 @@ public class Cannon {
     }
 
     float get_angle(){
-        float zx = Main.zombies.get(0).x + Main.zombies.get(0).w / 2, zy = Main.zombies.get(0).y + Main.zombies.get(0).h / 2;
+        float zx = Main.zombies.get(0).x + (float)Main.zombies.get(0).w / 2, zy = Main.zombies.get(0).y + (float)Main.zombies.get(0).h / 2;
         return (float)Math.toDegrees((Math.atan((y - zy) / (x - zx)) + (x >= zx ? Math.PI : 0)));
     }
 

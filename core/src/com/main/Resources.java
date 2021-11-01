@@ -15,6 +15,8 @@ public class Resources {
     static Texture button_cannon_mounted = new Texture(Gdx.files.internal("mountedCannonIcon.png"));
     static Texture button_locked = new Texture(Gdx.files.internal("locked.png"));
     static Texture button_selected = new Texture(Gdx.files.internal("border.png"));
+    static Texture button_close = new Texture(Gdx.files.internal("x.png"));
+    static Texture tooltip_bg = new Texture(Gdx.files.internal("ttbg.png"));
 
     //Cannons
     static Texture cannon = new Texture(Gdx.files.internal("Cannon.png"));
@@ -23,6 +25,7 @@ public class Resources {
     static Texture cannon_double = new Texture(Gdx.files.internal("doubleCannon.png"));
     static Texture cannon_laser = new Texture(Gdx.files.internal("laserCannon.png"));
     static Texture cannon_mounted = new Texture(Gdx.files.internal("mountedCannon.png"));
+    static Texture cannon_missile = new Texture(Gdx.files.internal("cannon_missile.png"));
 
     //Bullets
     static Texture bullet = new Texture(Gdx.files.internal("Bullet.png"));

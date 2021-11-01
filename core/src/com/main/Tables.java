@@ -8,6 +8,7 @@ public class Tables {
     static HashMap<String, Texture> cannon_resources = new HashMap<String, Texture>();
     static HashMap<String, Texture> button_resources = new HashMap<String, Texture>();
     static HashMap<String, Texture> zombie_resources = new HashMap<String, Texture>();
+    static HashMap<String, String> tooltip_info = new HashMap<String, String>();
 
     static void init(){
         cannon_resources.put("fire", Resources.cannon_fire);
@@ -15,12 +16,20 @@ public class Tables {
         cannon_resources.put("double", Resources.cannon_double);
         cannon_resources.put("laser", Resources.cannon_laser);
         cannon_resources.put("mounted", Resources.cannon_mounted);
+        cannon_resources.put("missile", Resources.cannon_missile);
 
         button_resources.put("fire", Resources.button_cannon_fire);
         button_resources.put("super", Resources.button_cannon_super);
         button_resources.put("double", Resources.button_cannon_double);
         button_resources.put("laser", Resources.button_cannon_laser);
         button_resources.put("mounted", Resources.button_cannon_mounted);
+        button_resources.put("close", Resources.button_close);
+
+        tooltip_info.put("fire", "Fires some bullets at some rate of fire.");
+        tooltip_info.put("super", "Fires some bullets at some rate of fire.");
+        tooltip_info.put("double", "Fires some bullets at some rate of fire.");
+        tooltip_info.put("laser", "Fires some bullets at some rate of fire.");
+        tooltip_info.put("mounted", "Fires some bullets at some rate of fire.");
 
         zombie_resources.put("dif", Resources.zombie_dif);
         zombie_resources.put("speedy", Resources.zombie_speedy);
