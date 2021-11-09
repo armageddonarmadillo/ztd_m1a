@@ -19,14 +19,14 @@ public class Zombie {
     TextureRegion frame;
     float frame_time = 0.2f; //1 second = 1.0f
 
-    Zombie(String type, int x, int y, int speed){
+    Zombie(String type, int x, int y){
         this.type = type;
         this.x = x;
         this.y = y;
-        this.speed = speed;
-        hp = 5;
-        w = (Tables.zombie_resources.get(type) == null ? Resources.zombie.getWidth() : Tables.zombie_resources.get(type).getWidth()) / cols;
-        h = (Tables.zombie_resources.get(type) == null ? Resources.zombie.getHeight() : Tables.zombie_resources.get(type).getHeight()) / rows;
+        this.speed = Tables.values.get("speed_" + type) == null ? 1 : Tables.values.get("speed_" + type);
+        this.hp = Tables.values.get("health_" + type) == null ? 3 : Tables.values.get("health_" + type);
+        this.w = (Tables.zombie_resources.get(type) == null ? Resources.zombie.getWidth() : Tables.zombie_resources.get(type).getWidth()) / cols;
+        this.h = (Tables.zombie_resources.get(type) == null ? Resources.zombie.getHeight() : Tables.zombie_resources.get(type).getHeight()) / rows;
         init_animations();
     }
 

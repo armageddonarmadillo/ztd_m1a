@@ -8,7 +8,7 @@ public class Cannon {
     Sprite sprite;
     int x, y, w, h;
     String type;
-    int counter = 0, delay = 30;
+    int counter = 0, delay;
 
     Cannon(String type, int x, int y){
         this.type = type;
@@ -17,6 +17,7 @@ public class Cannon {
         h = Tables.cannon_resources.get(type) == null ? 50 : Tables.cannon_resources.get(type).getHeight();
         this.x = grid_lock(x - w / 2);
         this.y = grid_lock(y - h / 2);
+        delay = Tables.values.get("delay_" + type) == null ? 30 : Tables.values.get("delay_" + type);
         sprite.setPosition(this.x, this.y);
     }
 

@@ -9,6 +9,7 @@ public class Tables {
     static HashMap<String, Texture> button_resources = new HashMap<String, Texture>();
     static HashMap<String, Texture> zombie_resources = new HashMap<String, Texture>();
     static HashMap<String, String> tooltip_info = new HashMap<String, String>();
+    static HashMap<String, Integer> values = new HashMap<String, Integer>();
 
     static void init(){
         cannon_resources.put("fire", Resources.cannon_fire);
@@ -35,5 +36,34 @@ public class Tables {
         zombie_resources.put("speedy", Resources.zombie_speedy);
         zombie_resources.put("fast", Resources.zombie_fast);
         zombie_resources.put("riot", Resources.zombie_riot);
+
+        //CANNON PLACEMENT COSTS
+        values.put("place_fire", 30);
+        values.put("place_super", 25);
+        values.put("place_laser", 100);
+        values.put("place_double", 20);
+
+        //CANNON UNLOCK COSTS
+        values.put("unlock_fire", 500);
+        values.put("unlock_super", 500);
+        values.put("unlock_laser", 1000);
+        values.put("unlock_double", 250);
+
+        //CANNON FIRE DELAY
+        values.put("delay_fire", 10);
+        values.put("delay_laser", 100);
+        values.put("delay_double", 40);
+
+        //ZOMBIE SPEED
+        values.put("speed_dif", 1);
+        values.put("speed_speedy", 5);
+        values.put("speed_fast", 3);
+        values.put("speed_riot", 1);
+
+        //ZOMBIE HEALTH
+        values.put("health_dif", 2);
+        values.put("health_speedy", 2);
+        values.put("health_fast", 3);
+        values.put("health_riot", 10);
     }
 }
