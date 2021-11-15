@@ -37,8 +37,8 @@ public class Main extends ApplicationAdapter {
 		batch.begin();
 		/* bg */ batch.draw(Resources.bg, 0, 0);
 		/* UI */ UI.draw(batch);
-		for(Zombie z : zombies) z.draw(batch);
 		for(Cannon c : cannons) c.draw(batch);
+		for(Zombie z : zombies) z.draw(batch);
 		for(Button b : buttons) b.draw(batch);
 		for(Bullet b : bullets) b.draw(batch);
 		batch.end();
@@ -87,7 +87,7 @@ public class Main extends ApplicationAdapter {
 				return;
 			}
 
-			for(Cannon c : cannons) if(c.hitbox().contains(x, y)) return;
+			for(Cannon c : cannons) if(c.hitbox().contains(x, y)) { if(c.disabled) c.active = false; return; }
 			if(buildable(x, y)) cannons.add(new Cannon(current_type, x, y));
 		}
 	}
@@ -117,12 +117,13 @@ public class Main extends ApplicationAdapter {
 
 	void spawn_zombies(){
 		if(!zombies.isEmpty()) return;
-		for ( int i = 0; i < 5; i ++) zombies.add(new Zombie("fast", 1024 + i * 50, r.nextInt(400)));
+		for ( int i = 0; i < 5; i ++) zombies.add(new Zombie("speedy", 1024 + i * 50, r.nextInt(400)));
 	}
 
 	void housekeeping(){
 		for(Zombie z : zombies) if(!z.active) { zombies.remove(z); break; }
 		for(Bullet b : bullets) if(!b.active) { bullets.remove(b); break; }
+		for(Cannon c : cannons) if(!c.active) { cannons.remove(c); break; }
 	}
 
 	//*******************END OF FILE********************
