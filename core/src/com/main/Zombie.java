@@ -43,6 +43,7 @@ public class Zombie {
     void update(){
         x -= speed;
         active = x + w > 0 && hp > 0;
+        hit_detect();
     }
 
     void init_animations(){
@@ -67,4 +68,13 @@ public class Zombie {
     }
 
     Rectangle hitbox(){ return new Rectangle(x, y, w, h); }
+
+    void hit_detect(){
+        if(Main.walls.isEmpty()) return;
+        for(Wall w : Main.walls) if(w.hitbox().contains(x, y)) {
+            active = false;
+            w.hp--;
+        }
+    }
+
 }

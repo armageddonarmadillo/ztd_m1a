@@ -20,6 +20,8 @@ public class Main extends ApplicationAdapter {
 	static ArrayList<Cannon> cannons = new ArrayList<Cannon>();
 	static ArrayList<Button> buttons = new ArrayList<Button>();
 	static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	static ArrayList<Wall> walls = new ArrayList<Wall>();
+	static ArrayList<Effect> effects = new ArrayList<Effect>();
 
 	//THIS RUNS *ONCE* WHEN THE APPLICATION IS LOADED / OPENED
 	@Override
@@ -41,6 +43,8 @@ public class Main extends ApplicationAdapter {
 		for(Zombie z : zombies) z.draw(batch);
 		for(Button b : buttons) b.draw(batch);
 		for(Bullet b : bullets) b.draw(batch);
+		for(Wall w : walls) w.draw(batch);
+		for(Effect e : effects) e.draw(batch);
 		batch.end();
 	}
 
@@ -52,6 +56,7 @@ public class Main extends ApplicationAdapter {
 		for(Cannon c : cannons) c.update();
 		for(Button b : buttons) b.update();
 		for(Bullet b : bullets) b.update();
+		for(Wall w : walls) w.update();
 		//removal of inactive elements
 		housekeeping();
 	}
@@ -62,6 +67,8 @@ public class Main extends ApplicationAdapter {
 	void tap(){
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+			effects.add(new Effect("particles", x, y));
 
 			for(Button b : buttons) {
 				if (b.t != null && !b.t.hidden && b.t.close.hitbox().contains(x, y)) { b.t.hidden = true; return; }
@@ -80,6 +87,10 @@ public class Main extends ApplicationAdapter {
 					}
 				}
 				else {
+					if(b.type.equals("wall") || b.type.equals("mounted")){
+						if(walls.size() < 3) walls.add(new Wall(walls.size() * 50, 0, b.type.equals("mounted")));
+						return;
+					}
 					deselect();
 					b.selected = true;
 					current_type = b.type;
@@ -109,10 +120,16 @@ public class Main extends ApplicationAdapter {
 		Tables.init();
 		//make some buttons
 		buttons.add(new Button("ccc", 225 + buttons.size() * 75, 525));
+		buttons.get(buttons.size() - 1).locked = false;
+		buttons.get(buttons.size() - 1).selected = true;
 		buttons.add(new Button("fire", 225 + buttons.size() * 75, 525));
 		buttons.add(new Button("super", 225 + buttons.size() * 75, 525));
 		buttons.add(new Button("double", 225 + buttons.size() * 75, 525));
 		buttons.add(new Button("laser", 225 + buttons.size() * 75, 525));
+		buttons.add(new Button("wall", 225 + buttons.size() * 75, 525));
+		buttons.get(buttons.size() - 1).locked = false;
+		buttons.get(buttons.size() - 1).selected = false;
+		buttons.add(new Button("mounted", 225 + buttons.size() * 75, 525));
 	}
 
 	void spawn_zombies(){
@@ -124,6 +141,8 @@ public class Main extends ApplicationAdapter {
 		for(Zombie z : zombies) if(!z.active) { zombies.remove(z); break; }
 		for(Bullet b : bullets) if(!b.active) { bullets.remove(b); break; }
 		for(Cannon c : cannons) if(!c.active) { cannons.remove(c); break; }
+		for(Wall w : walls) 	if(!w.active) { walls.remove(w);   break; }
+		for(Effect e : effects) if(!e.active) { effects.remove(e); break; }
 	}
 
 	//*******************END OF FILE********************

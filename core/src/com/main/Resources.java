@@ -21,6 +21,7 @@ public class Resources {
     static Texture green_bar = new Texture(Gdx.files.internal("green_bar.png"));
     static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
     static Texture button_wall = new Texture(Gdx.files.internal("WallIcon.png"));
+    static Texture damaged = new Texture(Gdx.files.internal("damaged.png"));
 
     //Cannons
     static Texture cannon = new Texture(Gdx.files.internal("Cannon.png"));
@@ -43,4 +44,10 @@ public class Resources {
     static Texture zombie_speedy = new Texture(Gdx.files.internal("speedy_zombie.png"));
     static Texture zombie_riot = new Texture(Gdx.files.internal("riotzombieBIG.png"));
     static Texture zombie_fast = new Texture(Gdx.files.internal("Fastzombies.png"));
+
+    //Effects
+    static Texture boom = new Texture(Gdx.files.internal("boom.png"));
+    static Texture muzzle_flash = new Texture(Gdx.files.internal("muzzleFlash.png"));
+    static Texture particles = new Texture(Gdx.files.internal("particles.png"));
+    static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
 }
