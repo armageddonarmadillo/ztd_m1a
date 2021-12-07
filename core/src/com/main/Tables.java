@@ -32,6 +32,8 @@ public class Tables {
         button_resources.put("mounted", Resources.button_cannon_mounted);
         button_resources.put("close", Resources.button_close);
         button_resources.put("wall", Resources.button_wall);
+        button_resources.put("pause", Resources.button_pause);
+        button_resources.put("play", Resources.button_play);
 
         tooltip_info.put("fire", "Fires some bullets at some rate of fire.");
         tooltip_info.put("super", "Fires some bullets at some rate of fire.");

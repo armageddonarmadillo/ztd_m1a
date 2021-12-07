@@ -14,6 +14,7 @@ public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
 	Random r;
 	static String current_type = "";
+	static boolean pause = false;
 
 	//TODO: GAME LISTS
 	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
@@ -49,14 +50,16 @@ public class Main extends ApplicationAdapter {
 	}
 
 	void update(){
-		spawn_zombies();
 		tap();
+		spawn_zombies();
 		//update loops
-		for(Zombie z : zombies) z.update();
-		for(Cannon c : cannons) c.update();
-		for(Button b : buttons) b.update();
-		for(Bullet b : bullets) b.update();
-		for(Wall w : walls) w.update();
+		if(!pause){
+			for(Zombie z : zombies) z.update();
+			for(Cannon c : cannons) c.update();
+			for(Button b : buttons) b.update();
+			for(Bullet b : bullets) b.update();
+			for(Wall w : walls) w.update();
+		}
 		//removal of inactive elements
 		housekeeping();
 	}
@@ -68,7 +71,7 @@ public class Main extends ApplicationAdapter {
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-			effects.add(new Effect("particles", x, y));
+			effects.add(new Effect("boom", x, y));
 
 			for(Button b : buttons) {
 				if (b.t != null && !b.t.hidden && b.t.close.hitbox().contains(x, y)) { b.t.hidden = true; return; }
@@ -76,6 +79,11 @@ public class Main extends ApplicationAdapter {
 			}
 
 			for(Button b : buttons) if(b.hitbox().contains(x, y)){
+				if(b.type.equals("pause") || b.type.equals("play")){
+					pause = !pause;
+					b.type = pause ? "play" : "pause";
+					return;
+				}
 				if(b.locked) {
 					if(b.t != null && b.t.hidden) { hide_tt(); b.t.hidden = false; }
 					else {
@@ -130,6 +138,9 @@ public class Main extends ApplicationAdapter {
 		buttons.get(buttons.size() - 1).locked = false;
 		buttons.get(buttons.size() - 1).selected = false;
 		buttons.add(new Button("mounted", 225 + buttons.size() * 75, 525));
+		buttons.add(new Button("pause", 1024 - 75, 525));
+		buttons.get(buttons.size() - 1).locked = false;
+		buttons.get(buttons.size() - 1).selected = false;
 	}
 
 	void spawn_zombies(){
