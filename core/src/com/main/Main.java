@@ -11,10 +11,12 @@ import java.util.Random;
 
 public class Main extends ApplicationAdapter {
 	//TODO: GAME VARIABLES
-	SpriteBatch batch;
-	Random r;
+	static SpriteBatch batch;
+	static Random r;
+	static Start start;
 	static String current_type = "";
 	static boolean pause = false;
+	static boolean started = false;
 
 	//TODO: GAME LISTS
 	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
@@ -36,6 +38,7 @@ public class Main extends ApplicationAdapter {
 	@Override
 	public void render () {
 		ScreenUtils.clear(1, 0, 0, 1);
+		if(!started) { batch.begin(); start.draw(batch); batch.end(); update(); return; }
 		update();
 		batch.begin();
 		/* bg */ batch.draw(Resources.bg, 0, 0);
@@ -51,6 +54,7 @@ public class Main extends ApplicationAdapter {
 
 	void update(){
 		tap();
+		if(!started) return;
 		spawn_zombies();
 		//update loops
 		if(!pause){
@@ -70,6 +74,8 @@ public class Main extends ApplicationAdapter {
 	void tap(){
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+			if(!started) { start.handle_clicks(x, y); return; }
 
 			effects.add(new Effect("boom", x, y));
 
@@ -126,6 +132,8 @@ public class Main extends ApplicationAdapter {
 	void setup(){
 		//init tables
 		Tables.init();
+		//init scenes
+		start = new Start();
 		//make some buttons
 		buttons.add(new Button("ccc", 225 + buttons.size() * 75, 525));
 		buttons.get(buttons.size() - 1).locked = false;

@@ -66,23 +66,14 @@ public class Cannon {
     }
 
     float get_angle(){
-        float zx = 0, zy = 0;
-        float[] difs = new float[Main.zombies.size()];
-        int index = 0;
+        Zombie closest = null;
         for(Zombie z : Main.zombies){
-            int dx = x - z.x, dy = y - z.y;
-            difs[index++] = (float)Math.sqrt(dx * dx + dy * dy);
+            if(closest == null) { closest = z; continue; }
+            float cd = (float)Math.sqrt((x - closest.x) * (x - closest.x) + (y - closest.y) * (y - closest.y));
+            float zd = (float)Math.sqrt((x - z.x) * (x - z.x) + (y - z.y) * (y - z.y));
+            if(zd < cd) closest = z;
         }
-        Arrays.sort(difs);
-        float closest = difs[0];
-        for(Zombie z : Main.zombies){
-            int dx = x - z.x, dy = y - z.y;
-            if((float)Math.sqrt(dx * dx + dy * dy) == closest){
-                zx = z.x + (float)z.w / 2;
-                zy = z.y + (float)z.h / 2;
-            }
-        }
-        return (float)Math.toDegrees((Math.atan((y - zy) / (x - zx)) + (x >= zx ? Math.PI : 0)));
+        return (float)Math.toDegrees((Math.atan((float)(y - closest.y) / (x - closest.x)) + (x >= closest.x ? Math.PI : 0)));
     }
 
     int grid_lock(int n){
