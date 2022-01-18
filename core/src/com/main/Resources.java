@@ -2,6 +2,8 @@ package com.main;
 
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 
 public class Resources {
@@ -22,8 +24,6 @@ public class Resources {
     static Texture button_pause = new Texture(Gdx.files.internal("pause.png"));
     static Texture button_play = new Texture(Gdx.files.internal("play.png"));
     static Texture tooltip_bg = new Texture(Gdx.files.internal("ttbg.png"));
-    static Texture red_bar = new Texture(Gdx.files.internal("red_bar.png"));
-    static Texture green_bar = new Texture(Gdx.files.internal("green_bar.png"));
     static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
     static Texture button_wall = new Texture(Gdx.files.internal("WallIcon.png"));
     static Texture damaged = new Texture(Gdx.files.internal("damaged.png"));
@@ -55,4 +55,21 @@ public class Resources {
     static Texture muzzle_flash = new Texture(Gdx.files.internal("muzzleFlash.png"));
     static Texture particles = new Texture(Gdx.files.internal("particles.png"));
     static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
+
+    //Predefined Textures
+    static Texture red = createTexture(50, 50, Color.RED);
+    static Texture green = createTexture(50, 50, Color.GREEN);
+    static Texture tan = createTexture(50, 50, Color.TAN);
+
+    //Methods
+    static Texture createTexture(int w, int h, Color color){
+        Pixmap p = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+        p.setColor(color);
+        p.fillRectangle(0, 0, w, h);
+        return new Texture(p);
+    }
+
+    static Color inverse_color(Color color){
+        return new Color(1f - color.r, 1f - color.g, 1f - color.b, 1f);
+    }
 }

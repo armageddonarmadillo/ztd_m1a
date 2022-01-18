@@ -5,10 +5,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class UI {
-    static int money = 9999;
-    static int wave = 0;
-    static int score = 0;
-    static int life = 20;
+    static int money, wave, life, score;
     static BitmapFont font = new BitmapFont();
 
     static void draw(SpriteBatch batch){

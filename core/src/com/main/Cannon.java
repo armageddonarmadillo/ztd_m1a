@@ -7,8 +7,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
-import java.util.Arrays;
-
 public class Cannon {
     Sprite sprite;
     int x, y, w, h;
@@ -41,8 +39,8 @@ public class Cannon {
     void draw(SpriteBatch batch){
         sprite.draw(batch);
         if(disabled) { batch.draw(Resources.damaged, x, y); return;}
-        batch.draw(Resources.green_bar, x, y + h, (float)time * ((float)w / (float)time), 5);
-        batch.draw(Resources.red_bar, x, y + h, (float)timer * ((float)w / (float)time), 5);
+        batch.draw(Resources.green, x, y + h, ((float)time * ((float)w / (float)time)), 5);
+        batch.draw(Resources.red, x, y + h, ((float)timer * ((float)w / (float)time)), 5);
     }
 
     void update(){
@@ -57,9 +55,9 @@ public class Cannon {
     }
 
     void fire(){
-        if(Main.zombies.isEmpty()) return;
+        if(ZTD.zombies.isEmpty()) return;
         if(counter++ >= delay){
-            Main.bullets.add(new Bullet("bbb", x + w / 2, y + h / 2));
+            ZTD.bullets.add(new Bullet("bbb", x + w / 2, y + h / 2));
             //Main.effects.add(new Effect("muzzleflash", x + w + 25, y + h / 2));
             counter = 0;
         }
@@ -67,7 +65,7 @@ public class Cannon {
 
     float get_angle(){
         Zombie closest = null;
-        for(Zombie z : Main.zombies){
+        for(Zombie z : ZTD.zombies){
             if(closest == null) { closest = z; continue; }
             float cd = (float)Math.sqrt((x - closest.x) * (x - closest.x) + (y - closest.y) * (y - closest.y));
             float zd = (float)Math.sqrt((x - z.x) * (x - z.x) + (y - z.y) * (y - z.y));

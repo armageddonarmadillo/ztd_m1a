@@ -26,7 +26,7 @@ public class ToolTip {
 
     void draw(SpriteBatch batch){
         if(hidden) return;
-        batch.draw(Resources.tooltip_bg, x, y, w, h);
+        batch.draw(Resources.tan, x, y, w, h);
 
         String[] words = (Tables.tooltip_info.get(type) == null ? "No tooltip found..." : Tables.tooltip_info.get(type)).split(" ");
         int rtx = 35, rty = 5; //relative position to position of tooltip

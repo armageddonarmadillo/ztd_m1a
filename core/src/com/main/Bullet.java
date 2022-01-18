@@ -33,7 +33,7 @@ public class Bullet {
 
     float get_angle(){
         Zombie closest = null;
-        for(Zombie z : Main.zombies){
+        for(Zombie z : ZTD.zombies){
             if(closest == null) { closest = z; continue; }
             float cd = (float)Math.sqrt((x - closest.x) * (x - closest.x) + (y - closest.y) * (y - closest.y));
             float zd = (float)Math.sqrt((x - z.x) * (x - z.x) + (y - z.y) * (y - z.y));
@@ -45,8 +45,8 @@ public class Bullet {
     Rectangle hitbox(){ return new Rectangle(x, y, w, h); }
 
     void hit_detect(){
-        if(Main.zombies.isEmpty()) return;
-        for(Zombie z : Main.zombies) if(z.hitbox().contains(hitbox())) {
+        if(ZTD.zombies.isEmpty()) return;
+        for(Zombie z : ZTD.zombies) if(z.hitbox().contains(hitbox())) {
             active = false;
             z.hp--;
         }

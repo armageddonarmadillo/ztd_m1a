@@ -36,13 +36,16 @@ public class Zombie {
         frame_time += Gdx.graphics.getDeltaTime();
         frame = (TextureRegion)anim.getKeyFrame(frame_time, true);
         batch.draw(frame, x, y);
-        batch.draw(Resources.red_bar, x, y + h, mhp * (float)(w / mhp), 5);
-        batch.draw(Resources.green_bar, x, y + h, hp * (float)(w / mhp), 5);
+        batch.draw(Resources.red, x, y + h, (mhp * (float)(w / mhp)), 5);
+        batch.draw(Resources.green, x, y + h, (hp * (float)(w / mhp)), 5);
     }
 
     void update(){
         x -= speed;
         active = x + w > 0 && hp > 0;
+        UI.life -= x + w > 0 ? 0 : 1;
+        UI.score += hp > 0 ? 0 : 1;
+        UI.money += hp > 0 ? 0 : 5;
         hit_detect();
     }
 
@@ -70,8 +73,8 @@ public class Zombie {
     Rectangle hitbox(){ return new Rectangle(x, y, w, h); }
 
     void hit_detect(){
-        if(Main.walls.isEmpty()) return;
-        for(Wall w : Main.walls) if(w.hitbox().contains(x, y)) {
+        if(ZTD.walls.isEmpty()) return;
+        for(Wall w : ZTD.walls) if(w.hitbox().contains(x, y)) {
             active = false;
             w.hp--;
         }
