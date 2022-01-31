@@ -52,7 +52,7 @@ public class Resources {
 
     //Effects
     static Texture boom = new Texture(Gdx.files.internal("boom.png"));
-    static Texture muzzle_flash = new Texture(Gdx.files.internal("muzzleFlash.png"));
+    static Texture muzzle_flash = new Texture(Gdx.files.internal("muzzleflash.png"));
     static Texture particles = new Texture(Gdx.files.internal("particles.png"));
     static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
 
