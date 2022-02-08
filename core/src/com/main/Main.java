@@ -38,7 +38,8 @@ public class Main extends ApplicationAdapter {
 	//THIS RUNS ONCE PER FRAME
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
+	    Gdx.gl.glClearColor(1,0,0,1);
+		//ScreenUtils.clear(1, 0, 0, 1);
 		tap();
 		camera.update();
 		batch.setProjectionMatrix(camera.combined);
